@@ -43,18 +43,27 @@ if __name__ == '__main__':
 
     x1 = []
     x2 = []
-    for k in range(1000):
-        x1.append(alpha*((alpha-1)/(alpha+1))**k)
-        # x2.append(alpha * (-(alpha - 1) / (alpha + 1))**k)
 
+    x1 = np.arange(-5, 5, 0.1)
+    x2 = np.arange(-5, 5, 0.1)
 
-    x = np.meshgrid(x1)
+    x, y = np.meshgrid(x1, x2)
 
-    z = (1/2)*(x**2)
+    z = x**2 + y**2
     # z = -x**2 - 2*y**2 - 1
 
     fig, ax = plt.subplots(figsize=(10, 10))
-    CS = ax.contour(x, y, z, 20, colors='k')
+    CS = ax.contour(x, y, z, 20, cmap='viridis')
     ax.clabel(CS, inline=0.5, fontsize=10)
     ax.set_title('Curvas de nivel')
+    plt.show()
+
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
+    # plotting a scatter for example
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection="3d")
+    ax.plot_surface(x, y, z, rstride=1, cstride=1,
+                cmap='viridis', edgecolor='none')
     plt.show()
